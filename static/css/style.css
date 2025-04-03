@@ -1,0 +1,1878 @@
+/* Основные переменные и сброс стилей */
+:root {
+    --bg-color: #1a1a1a;
+    --card-bg: rgba(0, 0, 0, 0.8);
+    --text-color: #ffffff;
+    --primary-color: #FFD700;
+    --secondary-color: #4CAF50;
+    --danger-color: #ff4444;
+    --menu-btn-bg: rgba(255, 255, 255, 0.15);
+    --menu-btn-hover: rgba(255, 255, 255, 0.25);
+    --stat-bar-bg: #4A4A4A;
+    --stat-fill-color: #4CAF50;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --dark-bg: #1a1a1a;
+    --gold: #C4B454;
+    --text: #FFFFFF;
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --primary-blue: #007AFF;
+    --background-color: #F2F2F7;
+    --card-background: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #8E8E93;
+    --nav-inactive: #8E8E93;
+    --main-font: 'Unbounded', cursive;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+body {
+    font-family: var(--main-font);
+}
+
+.app-container {
+    max-width: 100%;
+    min-height: 100vh;
+    background: var(--background-color);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Верхняя панель */
+.header {
+    display: none;
+}
+
+/* Основной контент */
+.main-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.game-list {
+    width: 100%;
+}
+
+.game-list h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+/* Карточка игры */
+.game-card {
+    background: #007AFF;
+    border-radius: 16px;
+    padding: 16px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+}
+
+.game-content {
+    text-align: center;
+}
+
+.game-content h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.game-content p {
+    font-size: 16px;
+    margin-bottom: 24px;
+    opacity: 0.8;
+}
+
+/* Кнопка играть */
+.play-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: #007AFF;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    background: #f0f0f0;
+}
+
+/* Промо-баннер */
+.promo-banner {
+    background: var(--card-background);
+    padding: 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.promo-banner:hover {
+    background: #f5f5f5;
+}
+
+.promo-banner .arrow {
+    color: var(--text-secondary);
+    font-size: 20px;
+}
+
+/* Нижняя навигация */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.nav-item {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 12px;
+    padding: 8px;
+}
+
+.nav-item.active {
+    color: #007AFF;
+}
+
+.nav-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.nav-text {
+    font-size: 12px;
+}
+
+/* Для iPhone с челкой */
+@supports (padding: max(0px)) {
+    .header {
+        padding-top: max(16px, env(safe-area-inset-top));
+    }
+}
+
+/* Фоновое изображение с ночным пейзажем */
+.game-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #2B1B44 0%, #1a1a1a 100%);
+    z-index: -1;
+}
+
+/* Верхняя панель с иконками */
+.top-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.icon {
+    color: var(--gold);
+    font-size: 24px;
+    opacity: 0.7;
+}
+
+.icon.active {
+    opacity: 1;
+}
+
+/* Контейнер игры */
+.game-container {
+    min-height: 100vh;
+    padding-top: 80px; /* Отступ для статистики */
+    padding-bottom: 80px; /* Отступ для нижней панели */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Обновляем стили для игровых элементов */
+.game-elements {
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+}
+
+/* Карточка решения */
+.decision-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    margin: 20px;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    cursor: grab;
+    transition: all 0.3s ease;
+    animation: floatingCard 3s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Изображение персонажа */
+.character-image {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.character-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.character-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Текст решения */
+.decision-text {
+    font-family: var(--main-font);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: #333;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.decision-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.5), transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.decision-card:hover .decision-text::before {
+    transform: scaleX(1);
+}
+
+/* Контейнер эффектов */
+.decision-effects {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Колонки эффектов */
+.effects-column {
+    flex: 1;
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.effects-column:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок эффектов */
+.effects-header {
+    font-family: var(--main-font);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.effects-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    transform: translateX(-100%);
+    animation: headerLine 2s ease-in-out infinite;
+}
+
+@keyframes headerLine {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Список эффектов */
+.effects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Элемент эффекта */
+.effect-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Иконка эффекта */
+.effect-icon {
+    font-size: 16px;
+    animation: iconPop 2s ease-in-out infinite;
+}
+
+/* Значение эффекта */
+.effect-value {
+    font-family: var(--main-font);
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.effect-value:hover {
+    transform: scale(1.1);
+}
+
+/* Положительные значения */
+.effect-value.positive {
+    color: #4CAF50;
+}
+
+/* Отрицательные значения */
+.effect-value.negative {
+    color: #ff4444;
+}
+
+/* Анимация при свайпе влево */
+.decision-card[data-swipe="left"] {
+    transform: translateX(-20px) rotate(-5deg);
+    background: linear-gradient(135deg, #ff4444, #ff6b6b);
+}
+
+/* Анимация при свайпе вправо */
+.decision-card[data-swipe="right"] {
+    transform: translateX(20px) rotate(5deg);
+    background: linear-gradient(135deg, #4CAF50, #66bb6a);
+}
+
+/* Эффект при наведении */
+.decision-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Анимация появления карточки */
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.decision-card.new {
+    animation: cardAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 360px) {
+    .decision-card {
+        padding: 20px;
+        margin: 16px;
+    }
+
+    .character-image {
+        width: 56px;
+        height: 56px;
+    }
+
+    .decision-text {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .effects-column {
+        padding: 10px;
+    }
+}
+
+/* Обновленные стили для статистики */
+.stats-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #1a1a1a;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-icon {
+    font-size: 12px;
+    color: white;
+}
+
+.stat-bar {
+    width: 32px;
+    height: 2px;
+    background: rgb(255, 255, 255);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+#wisdom-bar .stat-bar-fill {
+    background: #FFD700;
+}
+
+#cruelty-bar .stat-bar-fill {
+    background: #860a0a;
+}
+
+#technology-bar .stat-bar-fill {
+    background: #2196F3;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000 !important;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Убираем показатели изменений */
+.stat-change {
+    display: none !important;
+}
+
+/* Карта в карточке */
+.map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.location-name {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+/* Подсказки для свайпа */
+.swipe-hint {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* Нижняя информационная панель */
+.bottom-info {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.player-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.years-count {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.era-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.year-counter {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.era-name {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* Статистика */
+.stats-container {
+    display: none; /* Скрываем дублирующуюся статистику справа */
+}
+
+/* Стили для эффектов */
+.effects-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.effect-column {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.effect-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Стили для советов */
+.advisor-advices {
+    margin: 12px 0;
+}
+
+.advisor-advice {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Кнопки решений */
+.decision-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.decision-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.decision-btn.deny {
+    background: #ff4444;
+    color: white;
+}
+
+.decision-btn.approve {
+    background: #4CAF50;
+    color: white;
+}
+
+/* Стили для эффектов */
+.effects-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.effect-column {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.effect-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Стили для советов */
+.advisor-advice {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.advisor-icon {
+    margin-right: 10px;
+}
+
+/* Стили для кнопок */
+button {
+    background-color: #4CAF50; /* Зеленый */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 400px) {
+    .app-container {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .decision-card {
+        margin: 12px;
+        padding: 16px;
+    }
+
+    .decision-buttons {
+        flex-direction: column;
+    }
+
+    .decision-btn {
+        width: 100%;
+    }
+
+    .stats-header {
+        padding: 8px 16px;
+    }
+
+    .stat-bar {
+        width: 50px;
+    }
+
+    .card-image {
+        height: 150px;
+    }
+    
+    .location-name {
+        font-size: 14px;
+        padding: 3px 10px;
+    }
+}
+
+/* Полоски характеристик */
+#wisdom-bar { background: #ffffff; }
+#cruelty-bar { background: #ffffff; }
+#tech-bar { background: #ffffff; }
+
+/* Анимации */
+@keyframes slideIn {
+    from {
+        transform: translate(-50%, -40%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+.main-card {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Адаптивность */
+@media (max-width: 360px) {
+    .main-card {
+        width: 95%;
+    }
+
+    .decision-text {
+        font-size: 16px;
+    }
+
+    .character-portrait {
+        width: 60px;
+        height: 60px;
+    }
+
+    .decision-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .stats-header {
+        padding: 8px;
+    }
+    
+    .decision-card {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+    .main-card {
+        background: #2c2c2c;
+    }
+
+    .decision-text,
+    .character-name {
+        color: var(--text-light);
+    }
+
+    .character-title,
+    .era-info {
+        color: #aaa;
+    }
+}
+
+/* Главное меню */
+.menu-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.menu-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('path/to/stars.png') repeat;
+    opacity: 0.3;
+    animation: twinkling 8s linear infinite;
+}
+
+.menu-title {
+    font-size: 48px;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    margin-bottom: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 10;
+}
+
+.menu-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+}
+
+/* Стили для экранов */
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: var(--bg-color);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .decision-card {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .decision-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .decision-btn {
+        width: 100%;
+    }
+
+    .stats-container {
+        padding: 10px;
+    }
+}
+
+/* Анимации */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.achievement-notification {
+    animation: pulse 2s infinite;
+}
+
+/* Достижения */
+.achievements-screen {
+    background: var(--background-color);
+    min-height: 100vh;
+}
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: var(--card-background);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: var(--primary-blue);
+    font-size: 17px;
+    padding: 0;
+    margin-right: 16px;
+}
+
+.achievements-list {
+    padding: 16px;
+}
+
+.achievement-item {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.achievement-item.locked {
+    opacity: 0.5;
+}
+
+.achievement-icon {
+    font-size: 24px;
+}
+
+.achievement-info h3 {
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.achievement-info p {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Стили для экрана рейтинга */
+.leaderboard-screen {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f5f5f5;
+}
+
+.leaderboard-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.leaderboard-list {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.leaderboard-item {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.rank {
+    width: 30px;
+    height: 30px;
+    background: #007AFF;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.player-details {
+    display: flex;
+    gap: 12px;
+    color: #999;
+    font-size: 14px;
+}
+
+.player-details span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Показываем изменения при свайпе */
+.decision-card.swipe-right ~ .stats-header .stat-change,
+.decision-card.swipe-left ~ .stats-header .stat-change {
+    opacity: 1;
+}
+
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
+    padding: 16px;
+    background: #f5f7fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.game-title {
+    font-family: var(--main-font);
+    font-size: 32px;
+    background: linear-gradient(45deg, #007AFF, #00C7FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.game-subtitle {
+    font-family: var(--main-font);
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+.stats-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.stat-box {
+    background: white;
+    border-radius: 16px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    font-size: 20px;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.menu-card {
+    background: #007AFF;
+    border-radius: 24px;
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0,122,255,0.2);
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.2s ease;
+}
+
+.menu-item:hover {
+    transform: translateX(4px);
+}
+
+.menu-item-icon {
+    font-size: 24px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.menu-item-text {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+.start-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    background: white;
+    color: #007AFF;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.start-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.button-icon {
+    font-size: 20px;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-item {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.1s; }
+.menu-item:nth-child(2) { animation-delay: 0.2s; }
+.menu-item:nth-child(3) { animation-delay: 0.3s; }
+
+.start-button {
+    animation: fadeIn 0.3s ease-out 0.4s forwards;
+    opacity: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .decision-card {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .decision-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .decision-btn {
+        width: 100%;
+    }
+
+    .stats-container {
+        padding: 10px;
+    }
+}
+
+/* Анимации */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.achievement-notification {
+    animation: pulse 2s infinite;
+}
+
+/* Достижения */
+.achievements-screen {
+    background: var(--background-color);
+    min-height: 100vh;
+}
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: var(--card-background);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: var(--primary-blue);
+    font-size: 17px;
+    padding: 0;
+    margin-right: 16px;
+}
+
+.achievements-list {
+    padding: 16px;
+}
+
+.achievement-item {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.achievement-item.locked {
+    opacity: 0.5;
+}
+
+.achievement-icon {
+    font-size: 24px;
+}
+
+.achievement-info h3 {
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.achievement-info p {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Стили для экрана рейтинга */
+.leaderboard-screen {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f5f5f5;
+}
+
+.leaderboard-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.leaderboard-list {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.leaderboard-item {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.rank {
+    width: 30px;
+    height: 30px;
+    background: #007AFF;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.player-details {
+    display: flex;
+    gap: 12px;
+    color: #999;
+    font-size: 14px;
+}
+
+.player-details span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Показываем изменения при свайпе */
+.decision-card.swipe-right ~ .stats-header .stat-change,
+.decision-card.swipe-left ~ .stats-header .stat-change {
+    opacity: 1;
+}
+
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
+    padding: 16px;
+    background: #f5f7fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.game-title {
+    font-size: 28px;
+    background: linear-gradient(45deg, #007AFF, #00C7FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.game-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Статистика */
+.stats-row {
+    margin-bottom: 12px;
+}
+
+.stat-box {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-2px);
+}
+
+/* Основная карточка */
+.game-card {
+    background: linear-gradient(135deg, #007AFF, #00C7FF);
+    border-radius: 16px;
+    padding: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0,122,255,0.2);
+    animation: fadeInUp 0.8s ease-out;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.feature-list {
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.3s ease;
+    animation: fadeInRight 0.6s ease-out;
+}
+
+.feature-item:hover {
+    transform: translateX(4px);
+}
+
+.feature-icon {
+    font-size: 20px;
+}
+
+.feature-text {
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Кнопка начала игры */
+.play-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: #007AFF;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.play-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Уменьшаем размер изображения персонажа */
+.character-image {
+    width: 80px; /* Уменьшаем размер */
+    height: 80px;
+    margin: 0 auto 16px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.character-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Анимации */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Оптимизация для маленьких экранов */
+@media (max-height: 600px) {
+    .game-screen {
+        gap: 12px;
+    }
+    
+    .game-header {
+        margin-bottom: 8px;
+    }
+    
+    .game-title {
+        font-size: 24px;
+    }
+    
+    .game-subtitle {
+        font-size: 12px;
+    }
+    
+    .feature-item {
+        padding: 8px;
+    }
+}
+
+/* Анимации для карточки */
+@keyframes floatingCard {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes glowingBorder {
+    0% { box-shadow: 0 0 5px rgba(0, 122, 255, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(0, 122, 255, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(0, 122, 255, 0.2); }
+}
+
+@keyframes iconPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Обновляем стили карточки */
+.decision-card {
+    animation: floatingCard 3s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.decision-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shimmer 3s linear infinite;
+    pointer-events: none;
+}
+
+/* Анимация для иконок эффектов */
+.effect-icon {
+    animation: iconPop 2s ease-in-out infinite;
+}
+
+/* Анимация для значений эффектов */
+.effect-value {
+    transition: transform 0.3s ease;
+}
+
+.effect-value:hover {
+    transform: scale(1.1);
+}
+
+/* Анимация для колонок эффектов */
+.effects-column {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.effects-column:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимация для заголовков эффектов */
+.effects-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.effects-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    transform: translateX(-100%);
+    animation: headerLine 2s ease-in-out infinite;
+}
+
+@keyframes headerLine {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Анимация для изображения персонажа */
+.character-image {
+    position: relative;
+}
+
+.character-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Анимация для текста решения */
+.decision-text {
+    position: relative;
+    z-index: 1;
+}
+
+.decision-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.5), transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.decision-card:hover .decision-text::before {
+    transform: scaleX(1);
+}
+
+/* Стили для профиля игрока */
+.player-profile {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 320px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #007AFF;
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-family: var(--main-font);
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.profile-username {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Анимации для профиля */
+.player-profile {
+    animation: profileAppear 0.5s ease-out;
+}
+
+@keyframes profileAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Эффект при наведении */
+.profile-avatar {
+    transition: transform 0.3s ease;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.1);
+}
+
+.navigation-button {
+    background: transparent;
+    border: none;
+    color: #007AFF;
+    font-size: 16px;
+    padding: 12px;
+    cursor: pointer;
+    font-family: var(--main-font);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navigation-button:hover {
+    opacity: 0.8;
+} 
